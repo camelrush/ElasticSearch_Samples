@@ -1,0 +1,29 @@
+@startuml
+interface "trail_log" as tl {
+    trail_datetime
+    srcip
+    dstip
+    action
+    comment
+}
+interface "host_list" as h1{
+    ip_addr
+    host_name
+    user_name
+}
+interface "host_list" as h2{
+    ip_addr
+    host_name
+    user_name
+}
+circle "host_list_policy" as pc1
+circle "host_list_policy" as pc2
+
+pc1<|-tl : ip_addr:srcip
+h1<-pc1
+tl->pc2 : dstip:ip_addr
+pc2-|>h2  
+
+note top of pc1 : 参照するLookupごとに\npolicy定義が必要
+
+@enduml
