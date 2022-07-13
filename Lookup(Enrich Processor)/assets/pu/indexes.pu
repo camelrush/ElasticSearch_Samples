@@ -18,11 +18,14 @@ interface "host_list" as h2{
 }
 circle "host_list_policy" as pc1
 circle "host_list_policy" as pc2
+class "trail_log_pipeline" as cp
 
 pc1<|-tl : ip_addr:srcip
 h1<-pc1
 tl->pc2 : dstip:ip_addr
 pc2-|>h2  
+tl<-up-cp
+note right of cp : Indexに対してPipelineを定義
 
 note top of pc1 : 参照するLookupごとに\npolicy定義が必要
 
